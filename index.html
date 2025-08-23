@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="nl" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Residentie Naperville Merelbeke � Sportstraat 14, 9820 Merelbeke</title>
+  <meta name="description" content="Residentie Naperville in het centrum van Merelbeke. Contact, adres, advalvas en handige links (gemeente, politie, nutsmaatschappijen en cloud drive)." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* THEME TOKENS */
+    :root{
+      --radius:14px;
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --max: 1100px;
+
+      /* Dark (default) */
+      --bg:#0b0e13;
+      --surface:#10151d;
+      --card:#121a24;
+      --line:#1b2430;
+      --muted:#9fb3c8;
+      --text:#eaf2fb;
+      --brand:#2f80ed;
+      --accent:#69d2ff;
+    }
+    /* Explicit overrides for manual modes */
+    html[data-theme="light"]{
+      --bg:#f6f9fc; --surface:#ffffff; --card:#ffffff; --line:#e6ecf2;
+      --muted:#5b6b7c; --text:#0f172a; --brand:#2f80ed; --accent:#0a66c2;
+    }
+    html[data-theme="dark"]{
+      --bg:#0b0e13; --surface:#10151d; --card:#121a24; --line:#1b2430;
+      --muted:#9fb3c8; --text:#eaf2fb; --brand:#2f80ed; --accent:#69d2ff;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.55;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:saturate(180%) blur(10px);
+      background:color-mix(in oklab, var(--bg) 88%, transparent);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:14px 0;
+    }
+    .brand{display:flex; align-items:center; gap:12px}
+    .brand-badge{
+      width:36px; height:36px; display:grid; place-items:center;
+      border-radius:10px; background:linear-gradient(135deg, var(--brand), color-mix(in oklab, var(--brand), white 35%));
+      color:#fff; font-weight:800; box-shadow:var(--shadow);
+    }
+    .brand-title{font-weight:700; letter-spacing:.2px}
+    .brand-sub{color:var(--muted); font-size:.9rem}
+    .menu{display:flex; gap:8px; flex-wrap:wrap}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:10px; font-weight:600; border:1px solid var(--line);
+      background:var(--surface); color:var(--text); text-decoration:none
+    }
+    .btn .ic{width:18px; height:18px}
+
+    /* HERO with BACKGROUND IMAGE (text on top) */
+    .hero{
+      position:relative; overflow:hidden;
+      border-bottom:1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.4)),
+        url("https://residentienaperville.wordpress.com/wp-content/uploads/2024/10/naperville-front.jpg") center/cover no-repeat;
+      color:#fff;
+    }
+    .hero-inner{ position:relative; z-index:1; padding:64px 0; }
+    h1{margin:.2em 0 .4em; font-size:clamp(28px, 4.5vw, 46px); line-height:1.1}
+    .lede{max-width:800px; font-size:1.08rem; opacity:.95}
+    .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .btn.primary{background:linear-gradient(135deg, var(--brand), color-mix(in oklab, var(--brand), white 35%)); color:#fff; border-color:transparent}
+
+    /* Sections */
+    section{padding:26px 0; border-bottom:1px solid var(--line)}
+    h2{font-size:clamp(22px, 3.2vw, 32px); margin:.1em 0 .3em}
+    .grid{display:grid; gap:18px}
+    @media (min-width:840px){ .grid.cols-2{grid-template-columns:1fr 1fr} .grid.cols-3{grid-template-columns:repeat(3,1fr)} }
+    .card{
+      background:var(--card);
+      border:1px solid var(--line); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow)
+    }
+    .muted{color:var(--muted)}
+    ul.clean{padding-left:16px; margin:8px 0}
+    .links .item{display:flex; align-items:flex-start; gap:10px; padding:12px; border-radius:12px; border:1px solid var(--line); background:var(--surface)}
+    .links .item strong{display:block}
+    .links a{word-break:break-word}
+
+    /* Map */
+    .map{border:0; width:100%; height:340px; border-radius:var(--radius); box-shadow:var(--shadow); background:var(--surface)}
+
+    /* Footer */
+    footer{padding:36px 0; color:var(--muted)}
+    .footgrid{display:grid; gap:16px}
+    @media (min-width:720px){ .footgrid{grid-template-columns:1fr 1fr} }
+
+    /* Icon styling (inline SVG sprite) */
+    .ic{width:20px; height:20px; flex:0 0 20px; fill:currentColor}
+    .with-ic{display:inline-flex; align-items:center; gap:8px}
+
+    /* Floating theme toggle (single on/off) */
+    .theme-fab{
+      position:fixed; right:18px; bottom:18px; z-index:9999;
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 12px; border-radius:999px; border:1px solid var(--line);
+      background:var(--surface); color:var(--text); cursor:pointer; user-select:none;
+      box-shadow:var(--shadow);
+    }
+    .theme-fab .mode{font-weight:600; font-size:14px}
+  </style>
+</head>
+<body>
+  <!-- SVG ICON SPRITE (no external CDN, ad-blocker friendly) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="i-mail" viewBox="0 0 24 24"><path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zm8 5 10-5H2l10 5zm0 2L2 8v8h20V8l-10 5z"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M15 5l-6 2-6-2v14l6 2 6-2 6 2V7l-6-2zm-6 4l6-2v12l-6 2V9z"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 2h7l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm7 6V3.5L18.5 8H13z"/></symbol>
+    <symbol id="i-city" viewBox="0 0 24 24"><path d="M3 22h18v-2H3v2zM6 20h3V10H6v10zm5 0h3V4h-3v16zm5 0h3V12h-3v8z"/></symbol>
+    <symbol id="i-police" viewBox="0 0 24 24"><path d="M12 2l7 3v6c0 4.97-3.05 9.36-7 11-3.95-1.64-7-6.03-7-11V5l7-3zm0 5l-2.5 1.5.5 2.9L12 10.5l2 1.9.5-2.9L12 7z"/></symbol>
+    <symbol id="i-recycle" viewBox="0 0 24 24"><path d="M7.6 6.6 10 2l2 3.5-1 .6 2.8 4.8H9.2l-1.6-2.8 1-.6zM3 17l2.5-4.3 1 .6 2.8-4.8 2.8 4.8-1 .6L16 17H3zm18-3-2.5 4.3-1-.6-2.8 4.8L12 17l1-.6L8 14h13z"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M7 2h2v2h6V2h2v2h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V2zm13 18V10H4v10h16z"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></symbol>
+    <symbol id="i-water" viewBox="0 0 24 24"><path d="M12 2s7 8 7 12a7 7 0 1 1-14 0c0-4 7-12 7-12z"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M6 19h11a4 4 0 0 0 0-8 6 6 0 0 0-11.5-1.5A4.5 4.5 0 0 0 6 19z"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M3.9 12a5 5 0 0 1 5-5h3v2h-3a3 3 0 0 0 0 6h3v2h-3a5 5 0 0 1-5-5zm11.2-3h-3v2h3a3 3 0 0 1 0 6h-3v2h3a5 5 0 0 0 0-10z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h10l-4-4 1.4-1.4L19.8 14l-7.4 7.4L11 20l4-4H5z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><path d="M6 12a6 6 0 1 1 12 0 6 6 0 0 1-12 0zm6-10h2v3h-2V2zM6 2h2v3H6V2zm-4 8h3v2H2v-2zm18 0h3v2h-3v-2zM6 19h2v3H6v-3zm6 0h2v3h-2v-3zM2.8 4.2l2.1-2.1L6.9 4.1 4.8 6.2 2.8 4.2zm14.3 14.3 2.1-2.1 2.1 2.1-2.1 2.1-2.1-2.1z"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 0 1 11.2 3a7.5 7.5 0 1 0 9.8 9.8z"/></symbol>
+  </svg>
+
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <!-- <div class="brand-badge" aria-hidden="true">RN</div> -->
+        <div>
+          <div class="brand-title">Residentie Naperville</div>
+          <div class="brand-sub">Sportstraat 14 - 9820 Merelbeke</div>
+        </div>
+      </div>
+
+      <nav class="menu" aria-label="Hoofdmenu">
+        <a class="btn with-ic" href="#over"><svg class="ic"><use href="#i-city"/></svg> Over</a>
+        <a class="btn with-ic" href="#contact"><svg class="ic"><use href="#i-mail"/></svg> Contact</a>
+        <a class="btn with-ic" href="#advalvas"><svg class="ic"><use href="#i-doc"/></svg> Advalvas</a>
+        <a class="btn with-ic" href="#links"><svg class="ic"><use href="#i-link"/></svg> Links</a>
+        <a class="btn with-ic" href="#cloud"><svg class="ic"><use href="#i-cloud"/></svg> Cloud</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO: background image with text on top -->
+    <section class="hero" role="img" aria-label="Voorgevel Residentie Naperville Merelbeke">
+      <div class="wrap hero-inner">
+        <h1>Residentie Naperville Merelbeke</h1>
+        <p class="lede">Appartementencomplex met <strong>5 appartementen</strong>, <strong>5 garages</strong> en <strong>3 privatieve staanplaatsen</strong>.</p>
+        <div class="hero-actions">
+          <a class="btn primary with-ic" href="https://www.google.com/maps/search/?api=1&query=50.9955335,3.7437359" target="_blank" rel="noopener noreferrer">
+            <svg class="ic"><use href="#i-map"/></svg> Route plannen
+          </a>
+          <a class="btn with-ic" href="#contact">
+            <svg class="ic"><use href="#i-mail"/></svg> Contact opnemen
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- OVER -->
+    <section id="over">
+      <div class="wrap grid cols-2">
+        <div class="card">
+          <h2 class="with-ic">Over het gebouw</h2>
+          <p>
+            Residentie Naperville werd in <strong>2012</strong> opgeleverd en omvat <strong>5 appartementen</strong>,
+            gebouwd met duurzame materialen en een eigentijdse afwerking.
+          </p>
+          <ul class="clean">
+            <li><strong>Gelijkvloers (3)</strong>: elk appartement heeft een ruime tuin met terras.</li>
+            <li><strong>1e verdieping (2)</strong>: units met terras voor- en achterkant.</li>
+            <li><strong>Parkeren</strong>: <strong>5 individuele garages</strong> + <strong>3 privatieve staanplaatsen</strong> achteraan.</li>
+            <li><strong>Bezoek</strong>: voldoende parkeergelegenheid langs de Sportstraat.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2 class="with-ic">Ligging</h2>
+          <p>
+            Schitterend gelegen in <strong>Merelbeke-Centrum</strong>: vlakbij sportsite en zwembad. Winkels en bushalte richting Gent op wandelafstand.
+          </p>
+          <iframe class="map" title="Kaart: Residentie Naperville"
+            src="https://www.google.com/maps?q=50.9955335,3.7437359&z=17&output=embed"
+            loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="wrap grid cols-2">
+        <div class="card">
+          <h2 class="with-ic">Contact</h2>
+          <p class="muted">Vereniging van Mede-Eigenaars (VME)</p>
+          <p>
+            Algemeen: <a class="with-ic" href="mailto:info@naperville.be">info@naperville.be</a><br/>
+            Syndicus: <a class="with-ic" href="mailto:syndicus@naperville.be">syndicus@naperville.be</a>
+          </p>
+          <div class="hero-actions">
+            <a class="btn with-ic" href="mailto:info@naperville.be?subject=Residentie%20Naperville%20-%20Info">
+              <svg class="ic"><use href="#i-mail"/></svg> Mail VME
+            </a>
+            <a class="btn with-ic" href="mailto:syndicus@naperville.be?subject=Residentie%20Naperville%20-%20Syndicus">
+              <svg class="ic"><use href="#i-mail"/></svg> Mail syndicus
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <h2 class="with-ic">Adres</h2>
+          <p>Sportstraat 14<br>9820 Merelbeke</p>
+          <p><a class="with-ic" href="https://www.google.com/maps/search/?api=1&query=50.9955335,3.7437359" target="_blank" rel="noopener"><svg class="ic"><use href="#i-arrow"/></svg> Open in Google Maps</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADVALVAS -->
+    <section id="advalvas">
+      <div class="wrap">
+        <div class="card">
+          <h2 class="with-ic">Advalvas</h2>
+          <div class="links grid cols-2" role="list">
+            <div class="item" role="listitem">
+              <svg class="ic" aria-hidden="true"><use href="#i-doc"/></svg>
+              <div>
+                <strong>Huishoudelijk reglement - laatste versie</strong>
+                <div><a href="https://naperville.be/vme/Huishoudelijk%20reglement%20V20180227.pdf" target="_blank" rel="noopener">Download PDF</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LINKS -->
+    <section id="links">
+      <div class="wrap grid cols-3">
+        <!-- Gemeentelijk -->
+        <div class="card">
+          <h2 class="with-ic">Gemeentelijk</h2>
+          <div class="links grid" style="gap:12px">
+            <div class="item">
+              <svg class="ic"><use href="#i-city"/></svg>
+              <div><strong>Gemeente Merelbeke</strong><div><a href="https://www.merelbeke.be/" target="_blank" rel="noopener">merelbeke.be</a></div></div>
+            </div>
+            <div class="item">
+              <svg class="ic"><use href="#i-recycle"/></svg>
+              <div><strong>Containerpark Merelbeke</strong><div><a href="https://www.merelbeke.be/recyclagepark" target="_blank" rel="noopener">Recyclagepark</a></div></div>
+            </div>
+            <div class="item">
+              <svg class="ic"><use href="#i-calendar"/></svg>
+              <div><strong>Afvalkalender 2024</strong><div><a href="https://www.ivmmilieubeheer.be/sites/default/files/2023-12/Merelbeke%20ophaalkalender%202024.pdf" target="_blank" rel="noopener">IVM - PDF</a></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Politiezone (SPLIT) -->
+        <div class="card">
+          <h2 class="with-ic">Politiezone</h2>
+          <div class="links grid" style="gap:12px">
+            <div class="item">
+              <svg class="ic"><use href="#i-police"/></svg>
+              <div>
+                <strong>Regio Rhode &amp; Schelde</strong>
+                <div><a href="https://www.politie.be/5418/" target="_blank" rel="noopener">politie.be/5418</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Overheid (SPLIT) -->
+        <div class="card">
+          <h2 class="with-ic">Overheid</h2>
+          <div class="links grid" style="gap:12px">
+            <div class="item">
+              <svg class="ic"><use href="#i-doc"/></svg>
+              <div>
+                <strong>FOD - Huurindexatie</strong>
+                <div><a href="https://statbel.fgov.be/nl/themas/consumptieprijsindex/huurcalculator" target="_blank" rel="noopener">Huurcalculator (Statbel)</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nutsmaatschappijen -->
+        <div class="card" style="grid-column:1 / -1">
+          <h2 class="with-ic">Nutsmaatschappijen</h2>
+          <div class="links grid cols-2" style="gap:12px">
+            <div class="item">
+              <svg class="ic"><use href="#i-bolt"/></svg>
+              <div>
+                <strong>Fluvius</strong>
+                <div class="muted">meteropname, storingen, gasgeur, defecte straatverlichting, ...</div>
+                <div><a href="https://www.fluvius.be/" target="_blank" rel="noopener">fluvius.be</a></div>
+              </div>
+            </div>
+            <div class="item">
+              <svg class="ic"><use href="#i-water"/></svg>
+              <div>
+                <strong>Farys</strong>
+                <div class="muted">watervoorziening, drinkwater, ...</div>
+                <div><a href="https://www.farys.be/nl" target="_blank" rel="noopener">farys.be</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CLOUD -->
+    <section id="cloud">
+      <div class="wrap grid">
+        <div class="card">
+          <h2 class="with-ic">Cloud</h2>
+          <p>Toegang voor mede-eigenaars tot de VME Cloud Drive.</p>
+          <p><a class="btn with-ic" href="https://rushfiles.one/client/default.aspx" target="_blank" rel="noopener"><svg class="ic"><use href="#i-cloud"/></svg> Open VME Cloud Drive</a></p>
+        </div>
+        <!-- <div class="card">
+          <h2>Snelle acties</h2>
+          <div class="hero-actions">
+            <a class="btn with-ic" href="#contact"><svg class="ic"><use href="#i-mail"/></svg> Contact VME</a>
+            <a class="btn with-ic" href="#advalvas"><svg class="ic"><use href="#i-doc"/></svg> Huishoudelijk reglement</a>
+            <a class="btn with-ic" href="https://www.google.com/maps/search/?api=1&query=50.9955335,3.7437359" target="_blank" rel="noopener"><svg class="ic"><use href="#i-map"/></svg> Route naar Sportstraat 14</a>
+          </div>
+        </div> -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footgrid">
+      <div>
+        <strong>Residentie Naperville</strong><br>
+        Sportstraat 14, 9820 Merelbeke
+        <div class="muted" style="margin-top:6px"><span id="y"></span> Residentie Naperville VME</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING THEME TOGGLE (single on/off) -->
+  <button id="themeFab" class="theme-fab" type="button" role="switch" aria-checked="false" aria-label="Thema wisselen (licht/donker)">
+    <svg id="themeFabIcon" class="ic" aria-hidden="true"><use href="#i-moon"/></svg>
+    <span id="themeFabLabel" class="mode">Donker</span>
+  </button>
+
+  <script>
+    // Year stamp
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // THEME: single on/off (light/dark), no auto mode.
+    (function(){
+      const root = document.documentElement;
+      const btn  = document.getElementById('themeFab');
+      const label= document.getElementById('themeFabLabel');
+      const icon = document.getElementById('themeFabIcon');
+
+      const setIconAndLabel = (mode) => {
+        if(mode === 'light'){
+          icon.firstElementChild?.setAttribute('href', '#i-sun');
+          label.textContent = 'Licht';
+          btn.setAttribute('aria-checked','true');
+        }else{
+          icon.firstElementChild?.setAttribute('href', '#i-moon');
+          label.textContent = 'Donker';
+          btn.setAttribute('aria-checked','false');
+        }
+      };
+
+      // Initialize: read saved pref; if none, start from system preference once.
+      const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      let pref = localStorage.getItem('theme-pref');
+      if(!pref){ pref = systemPrefersDark ? 'dark' : 'light'; }
+      root.setAttribute('data-theme', pref);
+      setIconAndLabel(pref);
+
+      // Toggle
+      btn.addEventListener('click', () => {
+        pref = (pref === 'light') ? 'dark' : 'light';
+        root.setAttribute('data-theme', pref);
+        localStorage.setItem('theme-pref', pref);
+        setIconAndLabel(pref);
+      });
+    })();
+  </script>
+</body>
+</html>
